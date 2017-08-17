@@ -26,6 +26,6 @@ public class PerfTestUtilTest {
 
     @Test
     public void formatPercentageTest() {
-        assertThat(PerfTestUtil.formatPercentage(1.125), is("1,13%"));
+        assertThat(PerfTestUtil.formatPercentage(1.125), is("1.13%"));
     }
 }

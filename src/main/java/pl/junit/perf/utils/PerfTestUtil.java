@@ -2,6 +2,7 @@ package pl.junit.perf.utils;
 
 import org.junit.runner.Description;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,6 +20,6 @@ public class PerfTestUtil {
     }
 
     public static String formatPercentage(double percentage) {
-        return String.format("%.2f", percentage) + "%";
+        return String.format(Locale.US, "%.2f", percentage) + "%";
     }
 }
