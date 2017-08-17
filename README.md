@@ -29,7 +29,7 @@ What more **Perf-jUnit works with [```JMH```](http://openjdk.java.net/projects/c
     <dependency>
         <groupId>com.github.pliszewski</groupId>
         <artifactId>perf-junit</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </dependency>
     ```
 
