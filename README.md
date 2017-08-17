@@ -1,6 +1,8 @@
 # Perf-jUnit
 Performance jUnit test framework
 
+[![Build Status](https://travis-ci.org/pliszewski/perf-junit.svg?branch=master)](https://travis-ci.org/pliszewski/perf-junit)
+
 ## Description
 ```Perf-jUnit``` was created in order to automatization of performance monitoring of your code. The main idea is to run test, measure the time and compare to time of reference test. **Thanks to that, you don't have to worry about running the test on different machines**. Using ```Perf-jUnit```, you decrare expected time in comparison to reference test and define acceptable threshold of deviation of this time (default value is 5%).  
 

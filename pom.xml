@@ -4,7 +4,7 @@
 
     <groupId>pl.junit.perf</groupId>
     <artifactId>perf-junit</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>perf-junit</name>
