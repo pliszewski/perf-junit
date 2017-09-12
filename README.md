@@ -6,7 +6,7 @@ Performance jUnit test framework
 ## Description
 ```Perf-jUnit``` was created in order to automatization of performance monitoring of your code. The main idea is to run test, measure the time and compare to time of reference test. **Thanks to that, you don't have to worry about running the test on different machines**. Using ```Perf-jUnit```, you decrare expected time in comparison to reference test and define acceptable threshold of deviation of this time (default value is 5%).  
 
-**```Perf-jUnit``` works with ```jUnit``` tests**. Adding special annotation ```@PerformanveTest``` you can define:
+**```Perf-jUnit``` works with ```jUnit``` tests**. Adding special annotation ```@PerformanceTest``` you can define:
 - number of warmup iterations (to warm up JVM),
 - number of iterations(executions) included to calcuations of average execution time,
 - reference test class
