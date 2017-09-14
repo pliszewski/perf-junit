@@ -1,5 +1,7 @@
 package pl.junit.perf;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -22,10 +24,13 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+
 /**
  * Created by pliszewski on 17.07.2017.
  */
 public class PerformanceTestWatcher implements TestRule {
+
+    private static final Logger log = LogManager.getLogger(PerformanceTestWatcher.class);
 
     /**
      * Static, thread safe map of reference tests and their's execution times
@@ -76,14 +81,14 @@ public class PerformanceTestWatcher implements TestRule {
     }
 
     private static void starting(Description description) {
-        System.out.println("\n[PERFORMANCE TEST]\nTest " + PerfTestUtil.getTestId(description) + " started");
+        log.info("[PERFORMANCE TEST] Test " + PerfTestUtil.getTestId(description) + " started");
     }
 
     private void warmup(Statement base, PerformanceTestParams params) throws Throwable {
         for (int i = 0; i < params.getWarmupIterations(); i++) {
             long startTime = System.nanoTime();
             base.evaluate();
-            System.out.println("Warmup iteration " + (i + 1) + ": " + PerfTestUtil.formatExecutionTime(System.nanoTime() - startTime, params.getTimeUnit()));
+            log.info("Warmup iteration " + (i + 1) + ": " + PerfTestUtil.formatExecutionTime(System.nanoTime() - startTime, params.getTimeUnit()));
         }
     }
 
@@ -105,7 +110,7 @@ public class PerformanceTestWatcher implements TestRule {
             base.evaluate();
             long execTime = System.nanoTime() - startTime;
             executionTimeSum += execTime;
-            System.out.println("Execution iteration " + (i + 1) + ": " + PerfTestUtil.formatExecutionTime(execTime, params.getTimeUnit()));
+            log.info("Execution iteration " + (i + 1) + ": " + PerfTestUtil.formatExecutionTime(execTime, params.getTimeUnit()));
         }
         return executionTimeSum / params.getIterations();
     }
@@ -127,7 +132,7 @@ public class PerformanceTestWatcher implements TestRule {
         if (referenceTest != null) {
             referenceTestsTimes.put(testClassName, Optional.of(executionTime));
             String refTestMessage = "Reference test: " + testId + " avg execution time: " + PerfTestUtil.formatExecutionTime(executionTime, params.getTimeUnit()) + " saved";
-            System.out.println(refTestMessage);
+            log.info(refTestMessage);
             return;
         }
 
@@ -158,12 +163,12 @@ public class PerformanceTestWatcher implements TestRule {
         if (executionTimeInReferenceTestUnit > upperLimit) {
             Assert.fail(testLogMessage);
         } else {
-            System.out.println(testLogMessage);
+            log.info(testLogMessage);
         }
     }
 
     private void finished(Description description, long executionTime, PerformanceTestParams params) {
-        System.out.println("Test " + PerfTestUtil.getTestId(description) + " finished, avg time: " + PerfTestUtil.formatExecutionTime(executionTime, params.getTimeUnit()));
+        log.info("Test " + PerfTestUtil.getTestId(description) + " finished, avg time: " + PerfTestUtil.formatExecutionTime(executionTime, params.getTimeUnit()));
     }
 
     private void executeReferenceTest(Class<?> testClass) {
