@@ -21,7 +21,7 @@ public class PerfTestUtilTest {
 
     @Test
     public void formatExecutionTimeTest() {
-        assertThat(PerfTestUtil.formatExecutionTime(11_000_000_000L, TimeUnit.SECONDS), is("11 seconds"));
+        assertThat(PerfTestUtil.formatExecutionTime(11_000_000_000L, TimeUnit.MILLISECONDS), is("11 000 milliseconds"));
     }
 
     @Test
